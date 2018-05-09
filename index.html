@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors Game</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+	// Makes the computer's play by randomly choosing between
+	// rock, paper or scissors.
+	// Arguments: None
+	// Returns: String value Rock, Paper, or Scissors corresponding to 
+	//			randomly generated integer beween 0 and 2.
+	function computerPlay() {
+		let computerMove = Math.floor( (Math.random() * 3) );
+
+		switch(computerMove) {
+			case 0:
+				return "Rock";
+				break;
+			case 1:
+				return "Paper";
+				break;
+			case 2:
+				return "Scissors";
+				break;
+			default:
+				break;
+		}
+	}
+
+	// Plays a single round of Rock, Paper, Scissors.
+	// Arguments: Player selection and Computer selection
+	// Returns: String declaring winner of the round
+	function playRound(playerSelection, computerSelection) {
+		// String method converting any input to UPPERCASE 
+		
+		// if-else statement tree comparing different combinations,
+		// returns string declaring winner of the round
+	}
+
+	let playerSelection = "rock";
+	let computerSelection = computerPlay();
+	console.log( playRound(playerSelection, computerSelection) );
+
+</script>
+
+</body>
+</html>
