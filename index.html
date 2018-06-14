@@ -7,6 +7,12 @@
 
 <script type="text/javascript">
 
+	// Variables to keep track of scores and the round
+	let playerScore = 0;
+	let computerScore = 0;
+	let roundCounter = 0;
+
+
 	// Makes the computer's play by randomly choosing between
 	// rock, paper or scissors.
 	// Arguments: None
@@ -37,63 +43,63 @@
 		// String method converting any input to UPPERCASE 
 		let playerMove = playerSelection.toLowerCase();
 		let computerMove = computerSelection.toLowerCase();
+		roundCounter++;
 		
 		// if-else statement tree comparing different combinations,
 		// returns string declaring winner of the round
-		if (playerMove === "rock" && computerMove === "paper") {
+		if( playerMove !== "rock" && playerMove !== "paper" && playerMove !== "scissors"){
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
+			return "Bad input. Please make sure you're typing in a viable option.";
+		} else if (playerMove === "rock" && computerMove === "paper") {
+			computerScore++;
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
 			return "You lose! Paper beats Rock.";
 		} else if (playerMove === "rock" && computerMove === "scissors") {
+			playerScore++;
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
 			return "You win! Rock beats Scissors.";
 		} else if (playerMove === "paper" && computerMove === "scissors") {
+			computerScore++;
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
 			return "You lose! Scissors beats Paper.";
 		} else if (playerMove === "paper" && computerMove === "rock") {
+			playerScore++;
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
 			return "You win! Paper beats Rock.";
 		} else if (playerMove === "scissors" && computerMove === "paper") {
+			playerScore++;
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
 			return "You win! Scissors beats Paper.";
 		} else if (playerMove === "scissors" && computerMove === "rock") {
+			computerScore++;
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
 			return "You lose! Rock beats Scissors.";
 		} else {
+			console.log("Round: " + roundCounter)
+			console.log("Player: " + playerScore + " vs. Computer: " + computerScore);
 			return "It's a draw!";
 		}
 	}
 
-	// Keeps track of the score,based upon the player and computer move selection
-	// arguments that are passed in.
-	function trackScore(scoreTally) {
-		
-		let playerScore = 0;
-		let computerScore = 0;
-		let score = "Player: " + playerScore + " vs. Computer: " + computerScore;
-
-		// if-else statement tree comparing different outcomes from playRound(),
-		// updates and returns score accordingly
-		if (scoreTally === "You lose! Paper beats Rock." || scoreTally === "You lose! Scissors beats Paper." || scoreTally === "You lose! Rock beats Scissors.") {
-			computerScore++;
-			console.log(score);
-			return score;
-		} else if (scoreTally === "You win! Rock beats Scissors." || scoreTally === "You win! Paper beats Rock." || scoreTally === "You win! Scissors beats Paper.") {
-			playerScore++;
-			console.log(score);
-			return score;
-		} else {
-			console.log(score);
-			return score;
-		}
-
-	}
-
 	// Plays five-round game of Rock, Paper, Scissors. 
-	// Loops through playRound function 5 times,
-	// along with the lines 66 to 68 below (encapsulate these 
-	// in a function so they're not rolling around globally.
+	// Loops through playRound function 5 times.
 	function game() {
 		for (let i = 0; i < 5; i++) {
 			let playerSelection = prompt("Please type in Rock, Paper, or Scissors:");
+			if(playerSelection === null) {
+				break;
+			}
 			let computerSelection = computerPlay();
-			let scoreTally = playRound(playerSelection, computerSelection);
-			console.log( playRound(playerSelection, computerSelection), trackScore(scoreTally));
+			console.log(playRound(playerSelection, computerSelection));
 		}
-		alert("Aaaand that's all for today folks (five games, that is)!")
+		alert("Aaaand that's all for today folks!");
 	}
 
 	game();
