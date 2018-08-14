@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Rock Paper Scissors Game</title>
-<!-- <script src="script.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
@@ -20,6 +20,11 @@
 let playerScore = 0;
 let computerScore = 0;
 let roundCounter = 0;
+
+// Variables to store div references
+const results = document.querySelector('#results');
+const runningScore = document.querySelector('#runningScore');
+const round = document.querySelector('#round');
 
 
 // Makes the computer's play by randomly choosing between
@@ -54,10 +59,6 @@ function playRound(playerSelection, computerSelection) {
 	let computerMove = computerSelection.toLowerCase();
 	
 	roundCounter++;
-
-	const results = document.querySelector('#results');
-	const runningScore = document.querySelector('#runningScore');
-	const round = document.querySelector('#round');
 	
 	// if-else statement tree comparing different combinations,
 	// returns string declaring winner of the round
@@ -109,40 +110,42 @@ function game() {
 // Node list of button elements on page
 const buttons = document.querySelectorAll('button');
 
-// const results = document.querySelector('#results');
-// const round = document.querySelector('#round');
-
 let computerSelection = computerPlay();
 
 	// .forEach method to iterate through each button on page
 	buttons.forEach((button) => {
 		// add 'click' listener to each button
 		button.addEventListener('click', (e) => {
-			
-			if(e.target.id === 'rock'){
-				playRound(e.target.id, computerSelection);
-			} else if(e.target.id === 'paper') {
-				playRound(e.target.id, computerSelection);
+			if(roundCounter == 5) {
+				endGame();
 			} else {
-				playRound(e.target.id, computerSelection);
+				if(e.target.id === 'rock'){
+					playRound(e.target.id, computerSelection);
+				} else if(e.target.id === 'paper') {
+					playRound(e.target.id, computerSelection);
+				} else {
+					playRound(e.target.id, computerSelection);
+				}
 			}
 		});
 	});
+}
 
-	// for (let i = 0; i < 5; i++) {
-	// 	let playerSelection = prompt("Please type in Rock, Paper, or Scissors:");
-
-	// playerSelection set to NULL for now to avoid error being thrown in JS console
-	// let playerSelection = null;
-	// 	if(playerSelection === null) {
-	// 		//break;
-	// 		return;
-	// 	}
-	// 	let computerSelection = computerPlay();
-	// 	console.log(playRound(playerSelection, computerSelection));
-	// }
-
-	//alert("Aaaand that's all for today folks!");
+// Function called to display final results when 5 rounds have been played.
+function endGame() {
+	if (playerScore < computerScore) {
+		round.textContent = "Round: " + roundCounter;
+		runningScore.textContent = "Player: " + playerScore + " vs. Computer: " + computerScore;
+		results.textContent = "You win some, you lose some...";
+	} else if (playerScore > computerScore) {
+		round.textContent = "Round: " + roundCounter;
+		runningScore.textContent = "Player: " + playerScore + " vs. Computer: " + computerScore;
+		results.textContent = "You are the 5-round champion!!!";
+	} else {
+		round.textContent = "Round: " + roundCounter;
+		runningScore.textContent = "Player: " + playerScore + " vs. Computer: " + computerScore;
+		results.textContent = "Wow, a tie! *Scratches head* Maybe another game?";
+	}
 }
 
 game();
